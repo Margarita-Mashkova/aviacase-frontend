@@ -1,4 +1,4 @@
-# aviacase-app
+# aviacase-frontend
 
 ## Project setup
 ```
