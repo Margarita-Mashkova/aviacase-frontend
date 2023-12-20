@@ -37,7 +37,7 @@
         <label>Фото</label>
         <div class="image-form">
             <div class="image-area">
-                <img class="img-photo" src= "../assets/image1.png" width="90" height="90">
+                <img class="img-photo" src= "../assets/add_photo.png" width="90" height="90">
             </div>
             <input class="hidden-input" @change="onFileChange" id="file" type="file" accept="image/*">
             <label for="file">
@@ -144,4 +144,20 @@ img{
     margin-bottom: 20px;
 }
 
+form{
+    padding: 40px 110px;
+}
+
+h4{
+    margin-bottom: 15px;
+}
+
+.btn-form{
+    margin-bottom: 0px;
+}
+
+.input-simple{
+    margin-bottom: 15px;
+    font-size: 11pt;
+}
 </style>

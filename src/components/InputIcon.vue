@@ -53,9 +53,9 @@ input{
     padding: 10px;
     font-size: 13pt;
     border-radius: 8px;
-    width: 100%;
     margin-left: 5px;
     font-family: 'Century Gothic';
+    width: 100%;
 }
 
 img{

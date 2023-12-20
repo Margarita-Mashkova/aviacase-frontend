@@ -9,7 +9,7 @@
         <div class="inputs">
             <InputIcon
             :type = "'password'"
-            :placeholder = "'Пароль'"
+            :placeholder = "'Текущий пароль'"
             :src = "'password.png'"
             :width = "'18'"
             :height = "'19'"
@@ -23,7 +23,7 @@
             />
         </div>
         <div class="btn-bar">
-            <button class="btn-form">Войти</button>
+            <button class="btn-form">Изменить</button>
         </div>     
     </form>
 </template>

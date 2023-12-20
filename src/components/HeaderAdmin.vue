@@ -1,5 +1,5 @@
 <template>
-    <div id="navbar">        
+    <div class="navbar">        
         <ul class="navbar-list">
             <li>
                 <router-link :to="'/home'">
@@ -39,13 +39,12 @@ export default {
 
 <style scoped>
 
-#navbar{
-    position: fixed;
+.navbar{
     display: flex;
     flex-direction: row;
     width: 100%;
     background-color: #282727;
-    font-size: 10pt;
+    font-size: 11pt;
     font-weight: bold;
 }
 .navbar-list{

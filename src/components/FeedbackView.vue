@@ -1,5 +1,5 @@
 <template>
-    <div class="feedback-container">
+    <div class="feedback-card">
         <div class="user">
             <div class="user-profile">
                  <img class="user-photo" src= "../assets/profile.png" width="50" height="50">
@@ -51,10 +51,10 @@ export default{
 </script>
 
 <style scoped>
-.feedback-container{
+.feedback-card{
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: #fcfcfc;
     font-family: Georgia, serif;
     font-size: 12pt;
     padding: 15px 30px;
@@ -62,8 +62,6 @@ export default{
     border-color: #128CAD;
     border-radius: 25px;
     color: black;
-
-    margin: 12%;
 }
 
 .user{

@@ -45,7 +45,6 @@ label{
 }
 
 .image-area{
-    width: 40%;
     display: flex;
 }
 
@@ -66,8 +65,7 @@ img{
 
 .card{
     flex-direction: column;
-    margin: 38%;
-    padding: 20px;
+    padding: 20px;    
 }
 
 .image-area{

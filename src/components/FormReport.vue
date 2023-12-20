@@ -67,22 +67,6 @@ label{
     justify-content: space-between;
 }
 
-
-table, td {
-    text-align: center;
-    border-bottom: 1px solid #128CAD;
-    background-color: #FFFFFF;
-    color: black;
-}
-
-td{
-    padding: 10px 0px;
-}
-
-table{
-    border: 3px solid #128CAD;
-}
-
 .btn-report{
     width: 100%;
     margin-bottom: 20px;

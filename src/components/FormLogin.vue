@@ -22,6 +22,7 @@
         />
         <div class="btn-bar">
             <button class="btn-form">Войти</button>
+            <!-- убрать для админа через v-if user.login == admin-->
             <button class="btn-form">Регистрация</button>
         </div>     
     </form>

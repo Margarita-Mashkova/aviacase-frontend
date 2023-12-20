@@ -37,4 +37,8 @@ label{
   margin-right: 10px;
 }
 
+#app > div.form-data > form > select:nth-child(5){
+    min-height: 150px;
+}
+
 </style>
