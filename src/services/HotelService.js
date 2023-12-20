@@ -10,7 +10,12 @@ class HotelService {
         return axios.get(URL)
     }
 
-    findToursByFilter(location, name) {
+    findHotel(id) {
+        let URL = HOTEL_API_BASE_URL + id
+        return axios.get(URL)
+    }
+
+    findHotelsByFilter(location, name) {
         let URL = HOTEL_API_BASE_URL + 'hotels/filter?location=' + location + '&name=' + name
         return axios.get(URL)
     }

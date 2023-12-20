@@ -26,7 +26,7 @@
                     <router-link :to="'/admin/change-password'">Сменить пароль</router-link>
                 </li>
                 <li>
-                    <router-link :to="'/admin/auth'">Выйти</router-link>
+                    <router-link :to="'/admin/auth'" @click="logout($event)">Выйти</router-link>
                 </li>
             </div>
         </ul>
@@ -34,9 +34,34 @@
 </template>
 
 <script>
+import UserService from "@/services/UserService";
 
 export default {
-  
+    data() {
+        return {
+            user: {}
+        }
+    },
+    methods: {
+        me(){
+            UserService.me().then((response) => {
+                if (response.status == 200) {
+                    this.user = response.data
+                }
+            })
+        },
+        logout(e){
+            UserService.exit().then((response) => {
+                if (response.status == 200) {
+                    this.user = ''
+                }
+            })
+            e.preventDefault()
+        }
+    },
+    mounted(){
+        this.me()        
+    }
 }
 </script>
 

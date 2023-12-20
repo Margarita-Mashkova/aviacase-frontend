@@ -6,7 +6,7 @@ import PageHomeUser from "@/pages/PageHomeUser";
 import PagePersonalData from "@/pages/PagePersonalData";
 
 import PageSearchTours from "@/pages/PageSearchTours";
-import PageViewTour from "@/pages/PageViewTour"
+import PageViewTour from "@/pages/PageViewTour";
 import PageSearchHotels from "@/pages/PageSearchHotels";
 
 import PageMakePurchase from "@/pages/PageMakePurchase";
@@ -33,12 +33,15 @@ const routes = [
     { path: "/registration", component: PageRegistration, name: "registration" },
     { path: "/edit-profile", component: PagePersonalData, name: "personal-data" },
 
-    { path: "/tours", component: PageSearchTours, name: "tours" },
-    { path: "/tour/:id", component: PageViewTour, name: "view-tour" },
     { path: "/hotels", component: PageSearchHotels, name: "hotels" },
-
+    { path: "/tours", component: PageSearchTours, name: "tours" },
+    
+    { path: "/tour/:id", component: PageViewTour, name: "view-tour" },
+    
+    { path: "/choose-hotel", component: PageSearchHotels, name: "choose-hotel" },
     { path: "/make-purchase", component: PageMakePurchase, name: "make-purchase" },
     { path: "/buy-tour", component: PageBuyTour, name: "buy-tour" },
+    
     { path: "/purchases", component: PageUserPurchases, name: "purchases" },
 
     { path: "/admin/auth", component: PageLoginAdmin, name: "login-admin", alias: "/admin" },
@@ -46,10 +49,11 @@ const routes = [
     { path: "/admin/change-password", component: PageChangePassword, name: "change-password" },
 
     { path: "/admin/tours", component: PageToursAdmin, name: "tours-admin" },
-    { path: "/admin/tour/:id/edit", component: PageTourEdit, name: "edit-tour" },
+    { path: "/admin/tour", component: PageTourEdit, name: "create-tour" },
+    { path: "/admin/tour/:id", component: PageTourEdit, name: "edit-tour" },
 
     { path: "/admin/hotels", component: PageHotelsAdmin, name: "hotels-admin" },
-    { path: "/admin/hotel/:id/edit", component: PageHotelEdit, name: "edit-hotel" },
+    { path: "/admin/hotel/:id", component: PageHotelEdit, name: "edit-hotel" },
     { path: "/admin/bind-hotels", component: PageBindHotels, name: "bind-hotels" },
 
     { path: "/admin/report", component: PageReport, name: "report" },

@@ -1,19 +1,24 @@
 import axios from 'axios'
 
-const FEEDBACK_API_BASE_URL = 'http://localhost:9000/feedback/'
+const FEEDBACK_API_BASE_URL = 'http://localhost:9000/feedback'
 
 class FeedbackService {
 
     //GET
     findAllFeedbacks() {
-        let URL = FEEDBACK_API_BASE_URL + 'feedbacks'
+        let URL = FEEDBACK_API_BASE_URL + '/feedbacks'
+        return axios.get(URL)
+    }
+
+    checkUserFeedback(userId, tourId){
+        let URL = FEEDBACK_API_BASE_URL + '/allow-creating?userId=' + userId + '&tourId=' +tourId
         return axios.get(URL)
     }
 
     //PUT
-    editFeedback(id, feedback) {
-        let URL = FEEDBACK_API_BASE_URL + id
-        return axios.putForm(URL, feedback)
+    editFeedback(id, feed) {
+        let URL = FEEDBACK_API_BASE_URL + "/" + id
+        return axios.put(URL, feed)
     }
 
     //POST
@@ -24,7 +29,7 @@ class FeedbackService {
 
     //DELETE
     deleteFeedback(id) {
-        let URL = FEEDBACK_API_BASE_URL + id
+        let URL = FEEDBACK_API_BASE_URL + "/" + id
         return axios.delete(URL)
     }
 }

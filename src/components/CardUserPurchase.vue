@@ -6,47 +6,64 @@
             </div>
 
             <div class="info">
-                <label class="title">Тур в дубай</label>
+                <label class="title">{{ purchase.tour.name }}</label>
 
                 <div class="properties">
                     <div class="property">
                         <label class="property-name">Страна:</label>
-                        <label class="property-value">Россия</label>
+                        <label class="property-value">{{ purchase.tour.country }}</label>
                     </div>
 
                     <div class="property">
                         <label class="property-name">Дата начала:</label>
-                        <label class="property-value">26.12.2023</label>
+                        <label class="property-value">{{ purchase.date }}</label>
+                    </div>
+
+                    <div class="property">
+                        <label class="property-name">Отель:</label>
+                        <label class="property-value">{{ purchase.hotel.name }}</label>
+                    </div>
+
+                    <div class="property">
+                        <label class="property-name">Количество ночей:</label>
+                        <label class="property-value">{{ purchase.nights }}</label>
+                    </div>
+
+                    <div class="property">
+                        <label class="property-name">Количество туристов:</label>
+                        <label class="property-value">{{ purchase.tourists }}</label>
+                    </div>
+
+                    <div class="property">
+                        <label class="property-name">Сумма:</label>
+                        <label class="property-value">{{ purchase.sum }} руб.</label>
                     </div>
                 </div>
-                <label class="title">от 5000 руб.</label>
 
-                <div class="btn-bar">
-                    <button class="btn-simple" @click="onCreateFeedbackMode($event)">
-                        Написать отзыв
-                    </button>
+                <div class="btn-bar" v-if="this.canCreateFeedback == true">
+                    <button class="btn-simple" @click="onCreateFeedbackMode($event)">Написать отзыв</button>
                 </div>
             </div>
         </div>
         <div v-if="createFeedbackMode">
             <div class="feedback-create-form">
-                <textarea type="text"></textarea>
+                <textarea type="text" v-model="text"></textarea>
                 <div class="radios">
                     <label>Оценка:</label>
-                    <input type="radio" id="one" value="1" v-model="stars">
+                    <input type="radio" id="one" value="1" v-model="rate">
                     <label for="one">1</label>
-                    <input type="radio" id="two" value="2" v-model="stars">
+                    <input type="radio" id="two" value="2" v-model="rate">
                     <label for="two">2</label>
-                    <input type="radio" id="three" value="3" v-model="stars">
+                    <input type="radio" id="three" value="3" v-model="rate">
                     <label for="three">3</label>
-                    <input type="radio" id="four" value="4" v-model="stars">
+                    <input type="radio" id="four" value="4" v-model="rate">
                     <label for="four">4</label>
-                    <input type="radio" id="five" value="5" v-model="stars">
+                    <input type="radio" id="five" value="5" v-model="rate">
                     <label for="five">5</label>
                 </div>
                 <div class="btn">
                     <button class="btn-simple" @click="onCancelFeedbackMode($event)">Отмена</button>
-                    <button class="btn-simple">Отправить</button>
+                    <button class="btn-simple" @click="sendFeedback($event)">Отправить</button>
                 </div>
             </div>            
         </div>
@@ -54,13 +71,18 @@
 </template>
 
 <script>
+import FeedbackService from '@/services/FeedbackService';
+
 export default {
     data() {
         return {
             createFeedbackMode: false,
-            stars:[]
+            canCreateFeedback: true,
+            text: '',
+            rate: ''
         };
     },
+    props:["purchase"],
     methods: {
         onCreateFeedbackMode(e) {
             this.createFeedbackMode = true;
@@ -69,8 +91,28 @@ export default {
         onCancelFeedbackMode(e) {
             this.createFeedbackMode = false;
             e.preventDefault();
+        },
+        sendFeedback(e){
+            let feedback = {text: this.text, rate: this.rate, tourId: this.purchase.tour.id }
+            FeedbackService.createFeedback(feedback).then(response =>{
+                if(response.status == 200){
+                    this.createFeedbackMode = false;
+                    alert("Отзыв отправлен!")
+                }
+            })
+            e.preventDefault();
+        },
+        checkCanCreateFeedback(){
+            FeedbackService.checkUserFeedback(this.purchase.user.id, this.purchase.tour.id).then(response =>{
+                if(response.status == 200){
+                    this.canCreateFeedback = response.data
+                }
+            })
         }
     },
+    mounted(){
+        this.checkCanCreateFeedback()
+    }
 };
 </script>
 
@@ -116,7 +158,6 @@ img {
 .feedback-create-form{
     display: flex;
     flex-direction: column;
-    
 }
 
 textarea{
@@ -129,6 +170,7 @@ textarea{
     border-color: #128cad;
     font-family: "Century Gothic";
     resize: none;
+    font-size: 11pt;
 }
 
 .btn{

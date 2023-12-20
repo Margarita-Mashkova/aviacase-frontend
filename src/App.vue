@@ -96,10 +96,11 @@ form {
 }
 
 .error {
-  padding: 2px;
+  padding: 10px;
   background-color: #ffb6b6;
-  margin: 0px 50px;
-  border-radius: 2px;
+  margin: 0px 0px 20px 0px;
+  border: 1px solid;
+  border-radius: 10px;
   border-color: #ed5656;
   display: flex;
 }

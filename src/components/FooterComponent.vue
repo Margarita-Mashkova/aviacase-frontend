@@ -21,6 +21,7 @@
   flex-direction: column;
   width: 100%;
   background-color: #161616;
+  margin-top: 45px;
 }
 
 .contacts{

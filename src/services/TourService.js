@@ -16,7 +16,7 @@ class TourService {
     }
 
     findToursByFilter(country, dateStart) {
-        let URL = TOUR_API_BASE_URL + 'tours/filter?coutry=' + country + '&dateStart=' + dateStart
+        let URL = TOUR_API_BASE_URL + 'tours/filter?country=' + country + '&dateStart=' + dateStart
         return axios.get(URL)
     }
 

@@ -39,19 +39,4 @@ export default {
 </script>
 
 <style>
-
-.error{
-    padding: 10px;
-    background-color: #ffb6b6;
-    margin: 10px 50px;
-    border: 1px solid;
-    border-radius: 10px;
-    border-color: #ed5656;
-    display: flex;
-}
-
-.label-error{
-  font-size: 11.5pt;
-  color: #b10000;
-}
 </style>

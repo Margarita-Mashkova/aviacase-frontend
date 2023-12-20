@@ -1,40 +1,46 @@
 <template>
     <div class="card">
-        <div class="image-area">
-            <img src="../assets/radisson_sochi.jpeg" height="250" width="400">
+        <div class="image-area" v-if="hotel.photo != null">
+            <img v-bind:src= "'/photos/'+ hotel.photo" height="250" width="400">
+        </div>
+        <div class="image-area" v-else>
+            <img src="../assets/no_photo.png" height="250" width="400">
         </div>
         
         <div class="info">
-            <label class="title">Райский остров</label>
+            <label class="title">{{ hotel.name }}</label>
             
             <div class="properties">
                 <div class="property">
                     <label class="property-name">Местоположение:</label>
-                    <label class="property-value">Россия, Сочи</label>
+                    <label class="property-value">{{ hotel.location }}</label>
                 </div>
 
                 <div class="property">
                     <label class="property-name">Питание:</label>
-                    <label class="property-value">Включено</label>
+                    <label v-if="hotel.feed == true" class="property-value">Включено</label>
+                    <label v-else class="property-value">Не включено</label>
                 </div>
 
                 <div class="property">
                     <label class="property-name">Цена за ночь:</label>
-                    <label class="property-value">1600 руб. за человека</label>
+                    <label class="property-value">{{ hotel.price }} руб. за человека</label>
                 </div>
 
                 <div class="property">
                     <label class="property-name">Количество звёзд:</label>
-                    <div v-for="star in stars" v-bind:key="star">
+                    <div v-for="star in hotel.star" v-bind:key="star">
                         <img class="star-point" src="../assets/star.png" height="23" width="25">
                     </div>                    
                 </div>
             </div>
 
-            <!-- v-if user.login == admin -->
-            <div class="btn-bar">
+            <div class="btn-bar" v-if="this.$route.name == 'hotels-admin'">
                 <button class="btn-simple">Изменить</button>
                 <button class="btn-simple">Удалить</button>
+            </div>
+            <div class="btn-bar" v-if="this.$route.name == 'choose-hotel'">
+                <button class="btn-simple" @click="chooseToTour($event)">Выбрать</button>
             </div>
         </div>      
     </div>
@@ -49,11 +55,20 @@ export default {
             rate: 3
         }
     },
+    props:{
+        hotel: null
+    },
     methods:{
         loadStars(){
             for (let i = 0; i < this.rate; i++){
                 this.stars.push(i)
             }
+        },
+        chooseToTour(e){
+            localStorage.setItem('purchase-hotelId', this.hotel.id)
+            localStorage.setItem('purchase-hotelName', this.hotel.name)
+            this.$router.push("/make-purchase")
+            e.preventDefault()
         }
     },
     mounted(){

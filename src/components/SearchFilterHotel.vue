@@ -3,22 +3,41 @@
         <div class="filter">
             <div class="property">
                 <label>Местоположение</label>
-                <input class="input-simple" type="text" placeholder="Страна или город">
+                <input v-model="location" class="input-simple" type="text" placeholder="Страна или город">
             </div>
             <div class="property">
                 <label>Название</label>
-                <input class="input-simple" type="text" placeholder="Название отеля">
+                <input v-model="name" class="input-simple" type="text" placeholder="Название отеля">
             </div>
             <div class="property">
-                <button class="btn-simple">Поиск</button>
+                <button class="btn-simple" @click="searchHotels($event)">Поиск</button>
             </div>          
         </div>
     </div>
 </template>
 
 <script>
+import HotelService from '@/services/HotelService';
 
 export default {
+    data(){
+        return{
+            location: '',
+            name: ''
+        }
+    },
+    methods:{
+        searchHotels(e){
+            HotelService.findHotelsByFilter(this.location, this.name).then(response =>{
+                if(response.status == 200){
+                    this.$emit('updateHotelsList', {
+                        hotels: response.data
+                    })
+                }
+            })
+            e.preventDefault()
+        },
+    }
   
 }
 </script>

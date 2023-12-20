@@ -14,8 +14,18 @@ class UserService {
         return axios.get(URL)
     }
 
+    findUserByLogin(login){
+        let URL = USER_API_BASE_URL + "find-by-login?login=" + login
+        return axios.get(URL)
+    }
+
     getUserPurchases() {
-        let URL = USER_API_BASE_URL + 'user-purchases/'
+        let URL = USER_API_BASE_URL + 'user-purchases'
+        return axios.get(URL)
+    }
+
+    exit(){
+        let URL = USER_API_BASE_URL + 'exit'
         return axios.get(URL)
     }
 

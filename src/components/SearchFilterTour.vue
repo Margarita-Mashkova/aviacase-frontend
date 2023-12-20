@@ -3,22 +3,41 @@
         <div class="filter">
             <div class="property">
                 <label>Куда</label>
-                <input class="input-simple" type="text" placeholder="Страна">
+                <input v-model="country" class="input-simple" type="text" placeholder="Страна">
             </div>
             <div class="property">
                 <label>Дата начала</label>
-                <input class="input-simple" type="date">
+                <input v-model="dateStart" class="input-simple" type="date">
             </div>
             <div class="property">
-                <button class="btn-simple">Поиск</button>
+                <button class="btn-simple" @click="searchTours($event)">Поиск</button>
             </div>          
         </div>
     </div>
 </template>
 
 <script>
+import TourService from '@/services/TourService'
 
 export default {
+    data(){
+        return{
+            country:'',
+            dateStart:''
+        }
+    },
+    methods:{
+        searchTours(e){
+            TourService.findToursByFilter(this.country, this.dateStart).then(response =>{
+                if(response.status == 200){
+                    this.$emit('updateToursList', {
+                        tours: response.data
+                    })
+                }
+            })
+            e.preventDefault()
+        },
+    }
   
 }
 </script>
