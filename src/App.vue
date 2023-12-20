@@ -1,23 +1,27 @@
 <template>
-  <!-- <router-view/> -->
-  <Comp />
+  <router-view />
 </template>
 
 <script>
-import Comp from "./pages/PageBindHostels.vue";
 
 export default {
-  name: "App",
-  components: {
-    Comp,
-  },
-};
+  name: "App"
+}
 </script>
 
 <style>
 #app {
   font-family: "Century Gothic";
   color: whitesmoke;
+}
+
+li a:hover {
+  color: rgb(15, 132, 165);
+}
+
+a{
+    text-decoration: none;
+    color: whitesmoke;
 }
 
 html,

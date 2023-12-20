@@ -13,7 +13,7 @@
                 <router-link :to="'/tours'">Туры</router-link>
             </li>            
             <li>
-                <router-link :to="'/hostels'">Отели</router-link>
+                <router-link :to="'/hotels'">Отели</router-link>
             </li>
             <div class="navbar-item-last">
                 <li>
@@ -40,11 +40,11 @@ export default {
 
 <style scoped>
 
-.navbar{    
+.navbar{
     display: flex;
     flex-direction: row;
     width: 100%;
-    background-color: #282727;
+    background-color: #161616;
     font-size: 11pt;
     font-weight: bold;
 }

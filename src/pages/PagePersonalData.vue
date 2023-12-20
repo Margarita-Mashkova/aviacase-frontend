@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-data{
     margin: 25px 500px;
 }

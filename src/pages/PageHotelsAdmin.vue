@@ -7,21 +7,21 @@
         <button class="btn-simple">Создать отель</button>
     </div>
     <div class="form-data">
-        <CardHostel />
-        <CardHostel />
-        <CardHostel />
+        <CardHotel />
+        <CardHotel />
+        <CardHotel />
     </div>
 </template>
   
 <script>
-import CardHostel from "@/components/CardHostel.vue";
+import CardHotel from "@/components/CardHotel.vue";
 import HeaderAdmin from "@/components/HeaderAdmin.vue";
 
 export default {
-    name: "PageHostelsAdmin",
+    name: "PageHotelsAdmin",
     components: {
         HeaderAdmin,
-        CardHostel
+        CardHotel
     },
 };
 </script>

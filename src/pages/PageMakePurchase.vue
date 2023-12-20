@@ -9,7 +9,7 @@
 
     <label class="heading">Выбранный отель</label>
     <div class="hostel-info">
-      <CardHostel />
+      <CardHotel />
     </div>
 
     <div class="parametrs">
@@ -32,7 +32,7 @@
 
 <script>
 import CardTour from "@/components/CardTour.vue";
-import CardHostel from "@/components/CardHostel.vue";
+import CardHotel from "@/components/CardHotel.vue";
 import HeaderUser from "@/components/HeaderUser.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 
@@ -42,7 +42,7 @@ export default {
     HeaderUser,
     CardTour,
     FooterComponent,
-    CardHostel,
+    CardHotel,
   },
 };
 </script>

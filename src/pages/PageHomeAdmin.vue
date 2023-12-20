@@ -16,7 +16,7 @@ export default {
 };
 </script>
   
-<style>
+<style scoped>
 .heading {
     text-align: -webkit-center;
     font-weight: bold;

@@ -1,6 +1,6 @@
 <template>
   <HeaderUser />
-  <img src="../assets/image_main.jpg" height="100%" width="100%" />
+  <img src="../assets/image_main2.jpg" height="100%" width="100%" />
   <div class="heading">
     <label>Популярные туры</label>
   </div>
@@ -27,7 +27,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-data {
   display: flex;
   flex-wrap: wrap;

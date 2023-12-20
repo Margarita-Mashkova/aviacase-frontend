@@ -2,28 +2,31 @@
     <div class="navbar">        
         <ul class="navbar-list">
             <li>
-                <router-link :to="'/home'">
+                <router-link :to="'/admin/home'">
                     <img src="../assets/aviacase_logo.png" width="73" height="50" >
                 </router-link>
             </li>
             <li>
-                <router-link :to="'/tours'">Туры</router-link>
+                <router-link :to="'/admin/tours'">Туры</router-link>
             </li>
             <li>
-                <router-link :to="'/hostels'">Отели</router-link>
+                <router-link :to="'/admin/hotels'">Отели</router-link>
             </li>
             <li>
-                <router-link :to="'/report'">Отчет о покупках</router-link>
+                <router-link :to="'/admin/report'">Отчет о покупках</router-link>
             </li>
             <li>
-                <router-link :to="'/bind-hostels'">Привязать отели к туру</router-link>
+                <router-link :to="'/admin/bind-hotels'">Привязать отели к туру</router-link>
             </li>
             <li>
-                <router-link :to="'/edit-profile'">Пользователи</router-link>
+                <router-link :to="''">Пользователи</router-link>
             </li>
             <div class="navbar-item-last">
                 <li>
-                    <router-link :to="'/auth'">Сменить пароль</router-link>
+                    <router-link :to="'/admin/change-password'">Сменить пароль</router-link>
+                </li>
+                <li>
+                    <router-link :to="'/admin/auth'">Выйти</router-link>
                 </li>
             </div>
         </ul>
@@ -63,7 +66,4 @@ li{
     position: absolute;
     right: 20px;
 }
-/*li a:hover {
-  color: #D276FD;
-}*/
 </style>

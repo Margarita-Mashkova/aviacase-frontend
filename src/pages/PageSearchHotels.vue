@@ -1,35 +1,35 @@
 <template>
     <HeaderUser />
-    <SearchFilterHostel/>
+    <SearchFilterHotel/>
     <div class="heading">
       <label>Результаты поиска</label>
     </div>
     <div class="form-data">
-      <CardHostel/>
-      <CardHostel/>
-      <CardHostel/>
+      <CardHotel/>
+      <CardHotel/>
+      <CardHotel/>
     </div>
     <FooterComponent/>
   </template>
   
   <script>
-  import CardHostel from "@/components/CardHostel.vue";
+  import CardHotel from "@/components/CardHotel.vue";
   import HeaderUser from "@/components/HeaderUser.vue";
   import FooterComponent from "@/components/FooterComponent.vue";
-  import SearchFilterHostel from "@/components/SearchFilterHostel.vue"
+  import SearchFilterHotel from "@/components/SearchFilterHotel.vue"
   
   export default {
-    name: "PageSearchHostels",
+    name: "PageSearchHotels",
     components: {
       HeaderUser,
       FooterComponent,
-      CardHostel,
-      SearchFilterHostel
+      CardHotel,
+      SearchFilterHotel
     },
   };
   </script>
   
-  <style>
+  <style scoped>
   .form-data {
     display: flex;
     flex-direction: column;

@@ -26,7 +26,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   .form-data {
     display: flex;
     flex-direction: column;

@@ -29,13 +29,20 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-data {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   margin-bottom: 20px;
 }
+
+.heading {
+    text-align: -webkit-center;
+    font-weight: bold;
+    font-size: 22pt;
+    margin: 20px 0px;
+  }
 
 .card {
   margin: 7px 170px;

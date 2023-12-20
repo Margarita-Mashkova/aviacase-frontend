@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-data {
   margin: 25px 150px;
   background-color: #fcfcfc;

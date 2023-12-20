@@ -1,26 +1,26 @@
 <template>
     <HeaderAdmin />
     <div class="form-data">
-        <FormHostelEdit />
+        <FormBindHotels />
     </div>
 </template>
   
 <script>
-import FormHostelEdit from "@/components/FormHostelEdit.vue";
+import FormBindHotels from "@/components/FormBindHotels.vue";
 import HeaderAdmin from "@/components/HeaderAdmin.vue";
 
 export default {
-    name: "PageHostelEdit",
+    name: "PageBindHotels",
     components: {
-        FormHostelEdit,
+        FormBindHotels,
         HeaderAdmin
     },
 };
 </script>
   
-<style>
+<style scoped>
 .form-data {
-    margin: 20px 480px;
+    margin: 55px 480px;
 }
 </style>
   

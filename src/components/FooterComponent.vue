@@ -20,8 +20,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: #282727;
-  
+  background-color: #161616;
 }
 
 .contacts{
