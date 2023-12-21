@@ -53,6 +53,7 @@ const routes = [
     { path: "/admin/tour/:id", component: PageTourEdit, name: "edit-tour" },
 
     { path: "/admin/hotels", component: PageHotelsAdmin, name: "hotels-admin" },
+    { path: "/admin/hotel", component: PageHotelEdit, name: "create-hotel" },
     { path: "/admin/hotel/:id", component: PageHotelEdit, name: "edit-hotel" },
     { path: "/admin/bind-hotels", component: PageBindHotels, name: "bind-hotels" },
 

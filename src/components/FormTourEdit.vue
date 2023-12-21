@@ -1,27 +1,62 @@
 <template>
     <form @submit.prevent>
         <h4>Тур</h4>
-        <label>Наименование тура</label>
-        <input v-model="editedTour.name" class="input-simple" type="text" placeholder="Наименование">
-        <label>Страна назначения</label>
-        <input v-model="editedTour.country" class="input-simple" type="text" placeholder="Страна">
-        <label>Дата начала</label>
-        <input v-model="editedTour.dateStart" class="input-simple" type="date">
-        <label>Цена за ночь за 1 человека</label>
-        <input v-model="editedTour.price" class="input-simple" type="number" placeholder="Цена">
-        <label>Фото</label>
+        <!-- Изменение тура -->
+        <div class="form-edit" v-if="this.editedTour != null">
+            <label>Наименование тура</label>
+            <input v-model="editedTour.name" class="input-simple" type="text" placeholder="Наименование">
+            <label>Страна назначения</label>
+            <input v-model="editedTour.country" class="input-simple" type="text" placeholder="Страна">
+            <label>Дата начала</label>
+            <input v-model="editedTour.startDate" class="input-simple" type="date">
+            <label>Цена за ночь за 1 человека</label>
+            <input v-model="editedTour.price" class="input-simple" type="number" placeholder="Цена" step="100">
+            <label>Фото</label>
 
-        <div class="image-form">
-            <div class="image-area">
-                <img class="img-photo" src="../assets/add_photo.png" width="90" height="90">
+            <div class="image-form">
+
+                <div class="image-area" v-if="editedTour.photo != null">
+                    <img class="img-photo" v-bind:src="'/photos/' + editedTour.photo" width="90" height="90">
+                </div>
+                <div class="image-area" v-else>
+                    <img class="img-photo" src="../assets/add_photo.png" width="90" height="90">
+                </div>
+
+                <input class="hidden-input" @change="onFileChange" id="file" type="file" accept="image/*">
+                <label for="file">
+                    <span class="input-file-btn">Выберите файл</span>
+                </label>
             </div>
-            <input class="hidden-input" @change="onFileChange" id="file" type="file" accept="image/*">
-            <label for="file">
-                <span class="input-file-btn">Выберите файл</span>
-            </label>
+
+            <div class="btn-bar">
+                <button class="btn-form" @click="editTour($event)">Сохранить</button>
+            </div>
         </div>
-        <div class="btn-bar">
-            <button class="btn-form">Сохранить</button>
+        <!-- Создание тура -->
+        <div class="form-edit" v-else>
+            <label>Наименование тура</label>
+            <input v-model="name" class="input-simple" type="text" placeholder="Наименование">
+            <label>Страна назначения</label>
+            <input v-model="country" class="input-simple" type="text" placeholder="Страна">
+            <label>Дата начала</label>
+            <input v-model="startDate" class="input-simple" type="date">
+            <label>Цена за ночь за 1 человека</label>
+            <input v-model="price" class="input-simple" type="number" placeholder="Цена" step="100">
+            <label>Фото</label>
+
+            <div class="image-form">
+                <div class="image-area">
+                    <img class="img-photo" src="../assets/add_photo.png" width="90" height="90">
+                </div>
+                <input class="hidden-input" @change="onFileChange" id="file" type="file" accept="image/*">
+                <label for="file">
+                    <span class="input-file-btn">Выберите файл</span>
+                </label>
+            </div>
+
+            <div class="btn-bar">
+                <button class="btn-form" @click="addTour($event)">Сохранить</button>
+            </div>
         </div>
     </form>
 </template>
@@ -32,17 +67,16 @@ import TourService from '@/services/TourService';
 export default {
     data() {
         return {
-            /*name: '',
+            name: '',
             country: '',
-            dateStart: '',
+            startDate: '',
             price: '',
-            photo: ''*/
+            photo: null,
             editedTour: null
         }
     },
     methods: {
         onFileChange(e) {
-            console.log(e)
             var files = e.target.files || e.dataTransfer.files;
             if (!files.length)
                 return;
@@ -54,29 +88,58 @@ export default {
             var vm = this;
 
             reader.onload = (e) => {
-                var preview = document.querySelector("#app > form > div.image-form > div > img")
+                var preview = document.querySelector("#app > div.form-data > form > div.form-edit > div > div > img")
                 vm.image = e.target.result;
                 preview.src = e.target.result;
             };
             reader.readAsDataURL(file);
-            /*this.user.photo = file*/
+            this.photo = file
         },
-        findTour(){
-            TourService.findTour(this.$route.params.id).then(response =>{
-                if(response.status == 200){
+        findTour() {
+            TourService.findTour(this.$route.params.id).then(response => {
+                if (response.status == 200) {
                     this.editedTour = response.data
                 }
             })
+        },
+        editTour(e) {
+            TourService.editTour(this.editedTour.id, this.editedTour).then(response => {
+                if (response.status == 200) {
+                    if (this.photo != null) {
+                        TourService.uploadTourPhoto(response.data.id, { photo: this.photo }).then(response1 => {
+                            if (response1.status == 200) {
+                                this.$router.push("/admin/tours")
+                            }
+                        })
+                    } else {
+                        this.$router.push("/admin/tours")
+                    }
+                }
+            })
+            e.preventDefault()
+        },
+        addTour(e) {
+            let newTour = { name: this.name, country: this.country, startDate: this.startDate, price: this.price }
+            TourService.createTour(newTour).then(response => {
+                if (response.status == 200) {
+                    if (this.photo != null) {
+                        TourService.uploadTourPhoto(response.data.id, { photo: this.photo }).then(response1 => {
+                            if (response1.status == 200) {
+                                this.$router.push("/admin/tours")
+                            }
+                        })
+                    } else {
+                        this.$router.push("/admin/tours")
+                    }
+                }
+            })
+            e.preventDefault()
         }
     },
     created() {
-        this.findTour()
-        console.log(this.tour)
-        /*this.name = this.tour.name
-        this.country = this.tour.country
-        this.dateStart = this.tour.dateStart
-        this.price = this.tour.price
-        this.photo = this.tour.photo*/
+        if (this.$route.params.id != null) {
+            this.findTour()
+        }
     }
 }
 </script>
@@ -145,5 +208,10 @@ h4 {
 .input-simple {
     margin-bottom: 15px;
     font-size: 11pt;
+}
+
+.form-edit {
+    display: flex;
+    flex-direction: column;
 }
 </style>

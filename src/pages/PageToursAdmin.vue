@@ -8,7 +8,7 @@
     </div>
     <div class="form-data" v-if="this.tours.length != 0">
         <div v-for="tour in tours" v-bind:key="tour">
-            <CardTour :tour="tour"/>
+            <CardTour :tour="tour" @updateToursList="onUpdateToursList"/>
         </div>
     </div>
     <div class="nothing" v-else>
@@ -37,13 +37,16 @@ export default {
         findAllTours(){
             TourService.findAllTours().then(response =>{
                 if(response.status == 200){
-                    this.tours = response.data
+                    this.tours = response.data.reverse()
                 }
             })
         },
         openFormCreateTour(e){
             this.$router.push("/admin/tour")
             e.preventDefault()
+        },
+        onUpdateToursList(){
+            this.findAllTours()
         }
     },
     mounted(){

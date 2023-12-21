@@ -46,24 +46,27 @@ export default {
         }
     },
     methods: {
-        me(){
+        me() {
             UserService.me().then((response) => {
                 if (response.status == 200) {
                     this.user = response.data
                 }
             })
         },
-        logout(e){
-            UserService.exit().then((response) => {
-                if (response.status == 200) {
-                    this.user = ''
-                }
-            })
+        logout(e) {
+            var sure = confirm("Вы уверены, что хотите выйти из профиля?")
+            if (sure) {
+                UserService.exit().then((response) => {
+                    if (response.status == 200) {
+                        this.user = ''
+                    }
+                })
+            }
             e.preventDefault()
         }
     },
-    mounted(){
-        this.me()        
+    mounted() {
+        this.me()
     }
 }
 </script>

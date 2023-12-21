@@ -1,7 +1,7 @@
 <template>
   <HeaderUser />
 
-  <div v-if="this.$route.name == 'hotels'">
+  <div class="hotels-container" v-if="this.$route.name == 'hotels'">
     <SearchFilterHotel @updateHotelsList="onUpdateHotelsList" />
     <div class="heading">
       <label>Результаты поиска</label>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div v-if="this.$route.name == 'choose-hotel'">
+  <div class="hotels-container" v-if="this.$route.name == 'choose-hotel'">
     <div class="heading">
       <label>Выберите один из отелей</label>
     </div>
@@ -25,6 +25,7 @@
       <label>К данному туру не привязано ни одного отеля :(</label>
     </div>
   </div>
+  
   <FooterComponent />
 </template>
   
@@ -71,7 +72,7 @@ export default {
   },
   mounted() {
     this.findAllHotels()
-    if (localStorage.getItem("purchase-tourId") != null) {
+    if (localStorage.getItem("purchase-tourId") != '') {
       this.findTour()
     }
   }
@@ -97,11 +98,15 @@ export default {
   text-align: -webkit-center;
   font-weight: bold;
   font-size: 22pt;
-  margin: 229px 0px;
+  margin: 228px 0px;
 }
 
 .card {
   margin: 7px 200px;
+}
+
+.hotels-container{
+  margin-bottom: 145px;
 }
 </style>
   

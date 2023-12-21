@@ -26,7 +26,7 @@
 
             <div class="btn-bar" v-if="this.$route.name == 'tours-admin'">
                 <button class="btn-simple" @click="openFormEditTour($event)">Изменить</button>
-                <button class="btn-simple">Удалить</button>
+                <button class="btn-simple" @click="deleteTour($event)">Удалить</button>
             </div>
             <div class="btn-bar" v-if="this.$route.name == 'view-tour'">
                 <button class="btn-simple" @click="chooseHotel($event)">Выбрать</button>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import TourService from '@/services/TourService';
 
 export default {
     props: {
@@ -55,8 +56,19 @@ export default {
             this.$router.push({ path: "/choose-hotel" })
             e.preventDefault()
         },
-        openFormEditTour(e){
+        openFormEditTour(e) {
             this.$router.push("/admin/tour/" + this.tour.id)
+            e.preventDefault()
+        },
+        deleteTour(e) {
+            var sure = confirm("Вы уверены, что хотите удалить тур?")
+            if (sure) {
+                TourService.deleteTour(this.tour.id).then(response => {
+                    if (response.status == 200) {
+                        this.$emit("updateToursList")
+                    }
+                })
+            }
             e.preventDefault()
         }
 

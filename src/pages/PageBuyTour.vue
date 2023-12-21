@@ -43,8 +43,8 @@ import PurchaseService from "@/services/PurchaseService";
 
 export default {
   name: "PageBuyTour",
-  data(){
-    return{
+  data() {
+    return {
       tourId: localStorage.getItem("purchase-tourId"),
       tourName: localStorage.getItem("purchase-tourName"),
       hotelId: localStorage.getItem("purchase-hotelId"),
@@ -59,21 +59,24 @@ export default {
     FooterComponent,
   },
   methods: {
-    buyTour(e){
-      let purchase = {nights: this.nights, tourists: this.tourists, hotelId: this.hotelId, tourId: this.tourId}
-      PurchaseService.buyTour(purchase).then(response =>{
-        if(response.status == 200){
-          localStorage.setItem("purchase-tourId", '')
-          localStorage.setItem("purchase-tourName", '')
-          localStorage.setItem("purchase-hotelId", '')
-          localStorage.setItem("purchase-hotelName", '')
-          localStorage.setItem("purchase-tourists", '')
-          localStorage.setItem("purchase-nights", '')
-          localStorage.setItem("purchase-sum", '')
-          console.log(response.data)
-          this.$router.push("/purchases")
-        }
-      })
+    buyTour(e) {
+      let purchase = { nights: this.nights, tourists: this.tourists, hotelId: this.hotelId, tourId: this.tourId }
+      var sure = confirm("Вы уверены, что хотите купить тур?")
+      if (sure) {
+        PurchaseService.buyTour(purchase).then(response => {
+          if (response.status == 200) {
+            localStorage.setItem("purchase-tourId", '')
+            localStorage.setItem("purchase-tourName", '')
+            localStorage.setItem("purchase-hotelId", '')
+            localStorage.setItem("purchase-hotelName", '')
+            localStorage.setItem("purchase-tourists", '')
+            localStorage.setItem("purchase-nights", '')
+            localStorage.setItem("purchase-sum", '')
+            console.log(response.data)
+            this.$router.push("/purchases")
+          }
+        })
+      }
       e.preventDefault()
     }
   }
@@ -81,7 +84,7 @@ export default {
 </script>
 
 <style scoped>
-.form-data{
+.form-data {
   margin: 25px 350px;
   background-color: #fcfcfc;
   border-radius: 25px;
@@ -92,21 +95,21 @@ export default {
   border-color: #128cad;
 }
 
-h4{
+h4 {
   font-weight: bold;
   margin: 20px 0px 0px 0px;
 }
 
-.btn-bar{
+.btn-bar {
   margin: 0px 200px 30px 200px;
 }
 
-.table-info{
-    margin: 72px 120px;
+.table-info {
+  margin: 72px 120px;
 }
 
-table{
-    width: 100%;
-    border: 1px solid #128cad;
+table {
+  width: 100%;
+  border: 1px solid #128cad;
 }
 </style>

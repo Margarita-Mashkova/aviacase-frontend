@@ -1,34 +1,34 @@
 import axios from 'axios'
 
-const HOTEL_API_BASE_URL = 'http://localhost:9000/hotel/'
+const HOTEL_API_BASE_URL = 'http://localhost:9000/hotel'
 
 class HotelService {
 
     //GET
     findAllHotels() {
-        let URL = HOTEL_API_BASE_URL + 'hotels'
+        let URL = HOTEL_API_BASE_URL + '/hotels'
         return axios.get(URL)
     }
 
     findHotel(id) {
-        let URL = HOTEL_API_BASE_URL + id
+        let URL = HOTEL_API_BASE_URL + "/" + id
         return axios.get(URL)
     }
 
     findHotelsByFilter(location, name) {
-        let URL = HOTEL_API_BASE_URL + 'hotels/filter?location=' + location + '&name=' + name
+        let URL = HOTEL_API_BASE_URL + '/hotels/filter?location=' + location + '&name=' + name
         return axios.get(URL)
     }
 
     //PUT
     editHotel(id, hotel) {
-        let URL = HOTEL_API_BASE_URL + id
-        return axios.putForm(URL, hotel)
+        let URL = HOTEL_API_BASE_URL + "/" + id
+        return axios.put(URL, hotel)
     }
 
-    uploadHotelPhoto(id, file) {
-        let URL = HOTEL_API_BASE_URL + id + '/upload'
-        return axios.putForm(URL, file)
+    uploadHotelPhoto(id, photo) {
+        let URL = HOTEL_API_BASE_URL + "/" + id + '/upload'
+        return axios.putForm(URL, photo)
     }
 
     //POST
@@ -39,7 +39,7 @@ class HotelService {
 
     //DELETE
     deleteHotel(id) {
-        let URL = HOTEL_API_BASE_URL + id
+        let URL = HOTEL_API_BASE_URL + "/" + id
         return axios.delete(URL)
     }
 }

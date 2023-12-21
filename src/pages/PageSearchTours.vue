@@ -4,9 +4,13 @@
   <div class="heading">
     <label>Результаты поиска</label>
   </div>
-  <div class="form-data" v-for="tour in tours" v-bind:key="tour">
-    <CardTour :tour="tour" />
+
+  <div class="tours-container">
+    <div class="form-data" v-for="tour in tours" v-bind:key="tour">
+      <CardTour :tour="tour" />
+    </div>
   </div>
+
   <div class="nothing" v-if="this.tours.length == 0">
     <label>Туры по Вашему запросу не найдены :(</label>
   </div>
@@ -66,12 +70,16 @@ export default {
   margin: 20px 0px;
 }
 
-.nothing{
-    text-align: -webkit-center;
-    font-weight: bold;
-    font-size: 22pt;
-    margin: 177px 0px;
-  }
+.nothing {
+  text-align: -webkit-center;
+  font-weight: bold;
+  font-size: 22pt;
+  margin: 177px 0px;
+}
+
+.tours-container {
+  margin-bottom: 60px;
+}
 
 .card {
   margin: 7px 200px;

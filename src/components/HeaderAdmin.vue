@@ -1,9 +1,9 @@
 <template>
-    <div class="navbar">        
+    <div class="navbar">
         <ul class="navbar-list">
             <li>
                 <router-link :to="'/admin/home'">
-                    <img src="../assets/aviacase_logo.png" width="73" height="50" >
+                    <img src="../assets/aviacase_logo.png" width="73" height="50">
                 </router-link>
             </li>
             <li>
@@ -18,15 +18,16 @@
             <li>
                 <router-link :to="'/admin/bind-hotels'">Привязать отели к туру</router-link>
             </li>
+            <!--
             <li>
                 <router-link :to="''">Пользователи</router-link>
-            </li>
+            </li> -->
             <div class="navbar-item-last">
                 <li>
                     <router-link :to="'/admin/change-password'">Сменить пароль</router-link>
                 </li>
                 <li>
-                    <router-link :to="'/admin/auth'" @click="logout($event)">Выйти</router-link>
+                    <router-link :to="'/admin/home'" @click="logout($event)">Выйти</router-link>
                 </li>
             </div>
         </ul>
@@ -43,31 +44,34 @@ export default {
         }
     },
     methods: {
-        me(){
+        me() {
             UserService.me().then((response) => {
                 if (response.status == 200) {
                     this.user = response.data
                 }
             })
         },
-        logout(e){
-            UserService.exit().then((response) => {
-                if (response.status == 200) {
-                    this.user = ''
-                }
-            })
+        logout(e) {
+            var sure = confirm("Вы уверены, что хотите выйти?")
+            if (sure) {                
+                UserService.exit().then((response) => {
+                    if (response.status == 200) {
+                        this.user = ''
+                        this.$router.push('/admin/auth')
+                    }
+                })
+            }
             e.preventDefault()
         }
     },
-    mounted(){
-        this.me()        
+    mounted() {
+        this.me()
     }
 }
 </script>
 
 <style scoped>
-
-.navbar{
+.navbar {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -75,17 +79,20 @@ export default {
     font-size: 11pt;
     font-weight: bold;
 }
-.navbar-list{
+
+.navbar-list {
     display: flex;
     margin: 7px;
 }
-li{
+
+li {
     display: flex;
     list-style-type: none;
     margin-right: 40px;
     align-self: center;
 }
-.navbar-item-last{
+
+.navbar-item-last {
     display: flex;
     align-self: center;
     position: absolute;

@@ -2,7 +2,7 @@
     <div class="purchase">
         <div class="card">
             <div class="image-area">
-                <img src="../assets/login_background1.png" height="250" width="400" />
+                <img v-bind:src="'/photos/' + purchase.tour.photo" height="250" width="400" />
             </div>
 
             <div class="info">
@@ -85,7 +85,8 @@ export default {
     props:["purchase"],
     methods: {
         onCreateFeedbackMode(e) {
-            this.createFeedbackMode = true;
+            if(this.createFeedbackMode) this.createFeedbackMode = false
+            else this.createFeedbackMode = true;
             e.preventDefault();
         },
         onCancelFeedbackMode(e) {
@@ -152,7 +153,7 @@ img {
     border: 1px solid;
     border-radius: 25px;
     border-color: #128cad;
-    padding: 30px;
+    padding: 0px 20px;
 }
 
 .feedback-create-form{
@@ -176,6 +177,7 @@ textarea{
 .btn{
     display: flex;
     align-self: flex-end;
+    margin-bottom: 15px;
 }
 
 .btn-simple{
