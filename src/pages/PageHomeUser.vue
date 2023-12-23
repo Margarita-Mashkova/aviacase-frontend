@@ -1,10 +1,10 @@
 <template>
   <HeaderUser />
   <img src="../assets/image_main2.jpg" height="100%" width="100%" />
-  <div class="heading">
+  <div class="heading" v-if="this.tours.length != 0">
     <label>Популярные туры</label>
   </div>
-  <div class="form-data">
+  <div class="form-data" v-if="this.tours.length != 0">
     <div v-for="tour in tours" v-bind:key="tour">
       <CardTour :tour="tour" />
     </div>
@@ -34,8 +34,10 @@ export default {
     findAllTours() {
       TourServise.findAllTours().then(response => {
         if (response.status == 200) {
-          for (let i = 0; i < 3; i++) {
-            this.tours.push(response.data[i])
+          if (response.data.length >= 3) {
+            for (let i = 0; i < 3; i++) {
+              this.tours.push(response.data[i])
+            }
           }
         }
       })

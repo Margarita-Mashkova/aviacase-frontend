@@ -1,8 +1,11 @@
 <template>
     <div class="purchase">
         <div class="card">
-            <div class="image-area">
+            <div class="image-area" v-if="purchase.tour.photo != null">
                 <img v-bind:src="'/photos/' + purchase.tour.photo" height="250" width="400" />
+            </div>
+            <div class="image-area" v-else>
+                <img src="../assets/no_photo.png" height="250" width="400">
             </div>
 
             <div class="info">

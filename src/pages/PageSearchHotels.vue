@@ -72,7 +72,7 @@ export default {
   },
   mounted() {
     this.findAllHotels()
-    if (localStorage.getItem("purchase-tourId") != '') {
+    if (localStorage.getItem("purchase-tourId") != '' && localStorage.getItem("purchase-tourId") != null) {
       this.findTour()
     }
   }

@@ -3,7 +3,7 @@
   <div class="heading">
     <label>Купленные туры</label>
   </div>
-  <div v-if="this.purchases.length != 0">
+  <div class="purchase-container" v-if="this.purchases.length != 0">
     <div class="form-data" >
       <div v-for="purchase in purchases" v-bind:key="purchase">
         <CardTour :purchase="purchase" />
@@ -68,6 +68,10 @@ export default {
 
 .purchase {
   margin: 7px 170px;
+}
+
+.purchase-container{
+  margin-bottom: 163px;
 }
 
 
